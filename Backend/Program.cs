@@ -1,5 +1,12 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using Backend.Data;
+using Backend.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
+DotNetEnv.Env.Load("../.env");
 
 // service registration
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +23,22 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddSingleton<TokenProvider>();
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o =>
+{
+   o.RequireHttpsMetadata = false;
+   o.MapInboundClaims = false;
+   o.TokenValidationParameters = new TokenValidationParameters
+   {
+      NameClaimType = JwtRegisteredClaimNames.Sub,
+      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]!)),
+      ValidIssuer = builder.Configuration["Jwt:Issuer"],
+      ValidAudience = builder.Configuration["Jwt:Audience"],
+      ClockSkew = TimeSpan.Zero
+   };
+});
+
 // app configuration
 var app = builder.Build();
 
@@ -25,5 +48,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
