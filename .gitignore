@@ -3,3 +3,6 @@
 Backend/bin/
 Backend/obj/
 Backend/contactmanager.db
+Backend/contactmanager.db-shm
+Backend/contactmanager.db-wal
+Backend/test.http

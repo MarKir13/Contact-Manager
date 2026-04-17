@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Backend.Data;
 using Backend.Services;
+using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
    options.ConfigureWarnings(warnings => 
       warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
 });
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
 
