@@ -9,10 +9,12 @@ namespace Backend.Services;
 public class UserService : IUserService
 {
     private readonly AppDbContext _context;
+    private readonly TokenProvider _tokenProvider;
 
-    public UserService(AppDbContext context)
+    public UserService(AppDbContext context, TokenProvider tokenProvider)
     {
         _context = context;
+        _tokenProvider = tokenProvider;
     }
 
     public async Task<bool> Register(RegisterDto dto)
@@ -35,5 +37,23 @@ public class UserService : IUserService
         await _context.SaveChangesAsync();
 
         return true;
+    }
+
+    public async Task<string> Login(LoginDto dto)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Username == dto.Username);
+        if (user == null)
+        {
+            throw new ArgumentException("Nieprawidłowy login lub hasło");
+        }
+
+        bool password_verify = BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
+        if (!password_verify)
+        {
+            throw new ArgumentException("Nieprawidłowy login lub hasło");
+        }
+
+        string token = _tokenProvider.CreateToken(user);
+        return token;
     }
 }

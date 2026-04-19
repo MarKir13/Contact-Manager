@@ -1,7 +1,5 @@
 using Backend.DTOs;
 using Backend.Services.Interfaces;
-using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -29,6 +27,21 @@ public class UserController : ControllerBase
         catch(ArgumentException ex)
         {
             return BadRequest(new {message = ex.Message});
+        }
+    }
+
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody] LoginDto dto)
+    {
+        try
+        {
+            string token = await _userService.Login(dto);
+            return Ok(token);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new {message = ex.Message});     
         }
     }
 }
