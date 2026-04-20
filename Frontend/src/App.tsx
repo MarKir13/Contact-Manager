@@ -1,10 +1,14 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import MainPage from './pages/MainPage'
 
 function App() {
   return (
-    <>
-      <h1>Contact Manager Site</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage/>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
