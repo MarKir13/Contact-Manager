@@ -24,7 +24,7 @@ public class Contact
 
     [Required]
     [MaxLength(15)]
-    public required string PhoneNumer { get; set; }
+    public required string PhoneNumber { get; set; }
 
     public required DateOnly BirthDate { get; set; }
 
