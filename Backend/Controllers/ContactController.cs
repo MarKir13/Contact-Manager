@@ -52,4 +52,19 @@ public class ContactController : ControllerBase
             return NotFound(new {message = ex.Message});
         }
     }
+
+    [HttpDelete]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> DeleteById(Guid id)
+    {
+        try
+        {
+            await _contactService.DeleteById(id);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new {message = ex.Message});
+        }
+    }
 }

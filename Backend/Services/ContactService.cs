@@ -88,4 +88,18 @@ public class ContactService : IContactService
 
         return contactDetails;
     }
+
+    public async Task<bool> DeleteById(Guid Id)
+    {
+        var contact = _context.Contacts.FirstOrDefault(c => c.Id == Id);
+        if(contact == null)
+        {
+            throw new KeyNotFoundException("Nie znaleziono takiego kontaktu");
+        }
+
+        _context.Contacts.Remove(contact);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }

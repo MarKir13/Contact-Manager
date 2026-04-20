@@ -24,7 +24,7 @@ const MainPage = () => {
         };
 
         fetchContacts();
-    },[]);
+    },[contactDetails]);
 
     const fetchDetails = async (id: string) => {
         try {
@@ -40,9 +40,22 @@ const MainPage = () => {
         }
     }
 
-    const displayDetails = (id: string) => {
-        fetchDetails(id);
-    };
+    const handleDeletion = async (id: string) => {
+
+
+        try {
+            const response = await request(`api/contact/${id}`, "DELETE");
+
+            if ( response.success ) {
+                alert("Pomyslnie usunieto kontakt");
+                setContactDetails(null);
+            } else {
+                alert(response.error);
+            }
+        } catch (err) {
+            alert("Wystąpił nieoczekiwany błąd: " + err);
+        }
+    }
 
     return (
         <>
@@ -53,7 +66,7 @@ const MainPage = () => {
                 <h3>{contact.name} {contact.surname}</h3>
                 <span>Telefon: {contact.phoneNumber}</span>
                 <span>Email: {contact.email}</span>
-                <button onClick={() => displayDetails(contact.id)}>Szczegóły</button>
+                <button onClick={() => fetchDetails(contact.id)}>Szczegóły</button>
             </div>
         ))}
 
@@ -69,6 +82,7 @@ const MainPage = () => {
                     {contactDetails.subcategoryName && ( <span>Podkategoria: {contactDetails.subcategoryName}</span> )}
                     
                     <button onClick={() => setContactDetails(null)}>Zamknij</button>
+                    <button onClick={() => handleDeletion(contactDetails.id)}>Usuń kontakt</button>
                 </div>
             </div>
         )}
