@@ -37,4 +37,19 @@ public class ContactController : ControllerBase
         var contactList = await _contactService.GetAll();
         return Ok(new { contacts = contactList});
     }
+
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        try
+        {
+            var contactDetails = await _contactService.GetById(id);
+            return Ok(new {contact = contactDetails});
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new {message = ex.Message});
+        }
+    }
 }

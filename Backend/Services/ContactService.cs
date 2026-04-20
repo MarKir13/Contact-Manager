@@ -59,4 +59,33 @@ public class ContactService : IContactService
 
         return contacts;
     }
+
+    public async Task<GetContactDetailsDto> GetById(Guid Id)
+    {
+        var contact = _context.Contacts.Include(c => c.Category).Include(c => c.Subcategory).FirstOrDefault(c => c.Id == Id);
+        if(contact == null)
+        {
+            throw new KeyNotFoundException("Nie znaleziono takiego kontaktu");
+        }
+
+        string subcategoryName = contact.SubcategoryName;
+        if (subcategoryName == null && contact.Subcategory != null)
+        {
+            subcategoryName = contact.Subcategory.Name;
+        }
+
+        var contactDetails = new GetContactDetailsDto
+        {
+          Id = contact.Id,
+          Name = contact.Name,
+          Surname = contact.Name,
+          BirthDate = contact.BirthDate,
+          PhoneNumber = contact.PhoneNumber,
+          Email = contact.Email,
+          CategoryName = contact.Category.Name,
+          SubcategoryName = subcategoryName
+        };
+
+        return contactDetails;
+    }
 }

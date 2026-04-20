@@ -4,6 +4,7 @@ import useApi from "../hooks/useApi";
 
 const MainPage = () => {
     const [contacts, setContacts] = useState([]);
+    const [contactDetails, setContactDetails] = useState<any | null>(null);
 
     const {request} = useApi();
 
@@ -25,6 +26,24 @@ const MainPage = () => {
         fetchContacts();
     },[]);
 
+    const fetchDetails = async (id: string) => {
+        try {
+            const response = await request(`api/contact/${id}`, "GET");
+
+            if ( response.success && response.data) {
+                setContactDetails(response.data.contact);
+            } else {
+                alert(response.error);
+            }
+        } catch (err) {
+            alert("Wystąpił nieoczekiwany błąd: " + err);
+        }
+    }
+
+    const displayDetails = (id: string) => {
+        fetchDetails(id);
+    };
+
     return (
         <>
         <Navbar />
@@ -34,10 +53,26 @@ const MainPage = () => {
                 <h3>{contact.name} {contact.surname}</h3>
                 <span>Telefon: {contact.phoneNumber}</span>
                 <span>Email: {contact.email}</span>
+                <button onClick={() => displayDetails(contact.id)}>Szczegóły</button>
             </div>
         ))}
+
+        {contactDetails && (
+            <div className="modalOverlay">
+                <div className="modalContent">
+                    <h2>Szczegóły kontaktu</h2>
+                    <span>Imię i nazwisko: {contactDetails.name} {contactDetails.surname}</span>
+                    <span>Email: {contactDetails.email}</span>
+                    <span>Telefon: {contactDetails.phoneNumber}</span>
+                    <span>Data urodzenia: {contactDetails.birthDate}</span>
+                    <span>Kategoria: {contactDetails.categoryName}</span>
+                    {contactDetails.subcategoryName && ( <span>Podkategoria: {contactDetails.subcategoryName}</span> )}
+                    
+                    <button onClick={() => setContactDetails(null)}>Zamknij</button>
+                </div>
+            </div>
+        )}
         </>
-        
     );
 }
  
