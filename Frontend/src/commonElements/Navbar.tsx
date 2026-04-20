@@ -5,23 +5,28 @@ const Navbar = () => {
     const token = sessionStorage.getItem("token");
     const isAuthorized = token ? true : false;
 
-    if (isAuthorized) {
-        return (
-            <nav>
-                <h1>Witaj w menedżerze kontaktów</h1>
-                <NavLink to="/login">Wyloguj się</NavLink>
-                <NavLink to="/add">Dodaj kontakt</NavLink>
-            </nav>
-        );
-    } else {
-        return (
-            <nav>
-                <h1>Witaj w menedżerze kontaktów</h1>
-                <NavLink to="/register">Zarejestruj się</NavLink>
-                <NavLink to="/login">Zaloguj się</NavLink>
-            </nav>
-        );
+    const handleLogout = () => {
+        sessionStorage.removeItem("token");
+        window.location.href = "/";
     }
+
+    return (
+        <nav>
+            <h1>Witaj w menedżerze kontaktów</h1>
+            
+            {isAuthorized ? (
+                <>
+                    <NavLink className="navButton" to="/add">Dodaj kontakt</NavLink>
+                    <button className="navButton" onClick={handleLogout}>Wyloguj się</button>
+                </>
+            ) : (
+                <>
+                    <NavLink className="navButton" to="/register">Zarejestruj się</NavLink>
+                    <NavLink className="navButton" to="/login">Zaloguj się</NavLink>
+                </>
+            )}
+        </nav>
+    );
     
 }
  

@@ -83,7 +83,9 @@ public class ContactService : IContactService
           PhoneNumber = contact.PhoneNumber,
           Email = contact.Email,
           CategoryName = contact.Category.Name,
-          SubcategoryName = subcategoryName
+          SubcategoryName = subcategoryName,
+          CategoryId = contact.CategoryId,
+          SubcategoryId = contact.SubcategoryId
         };
 
         return contactDetails;
@@ -98,6 +100,30 @@ public class ContactService : IContactService
         }
 
         _context.Contacts.Remove(contact);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<bool> Update(Guid Id, UpdateContactDto dto)
+    {
+        var contact = _context.Contacts.FirstOrDefault(c => c.Id == Id);
+        if (contact == null)
+        {
+            throw new KeyNotFoundException("Nie znaleziono takiego kontaktu");
+        }
+
+        contact.Name = dto.Name;
+        contact.Surname = dto.Surname;
+        contact.Email = dto.Email;
+        contact.PhoneNumber = dto.PhoneNumber;
+        contact.BirthDate = dto.BirthDate;
+        contact.Surname = dto.Surname;
+        contact.Surname = dto.Surname;
+        contact.CategoryId = dto.CategoryId;
+        contact.SubcategoryId = dto.SubcategoryId;
+        contact.SubcategoryName = dto.SubcategoryName;
+
         await _context.SaveChangesAsync();
 
         return true;

@@ -67,4 +67,19 @@ public class ContactController : ControllerBase
             return NotFound(new {message = ex.Message});
         }
     }
+
+    [HttpPut]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateContactDto dto)
+    {
+        try
+        {
+            await _contactService.Update(id, dto);
+            return Ok();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new {message = ex.Message});
+        }
+    } 
 }

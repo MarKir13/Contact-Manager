@@ -4,8 +4,12 @@
 }
 
 a {
-  text-decoration: none;
+  text-decoration: underline;
   color: #000;
+}
+
+.navButton {
+  padding: 0 20px;
 }
 
 form {

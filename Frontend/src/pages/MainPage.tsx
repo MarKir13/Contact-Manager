@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../commonElements/Navbar";
 import useApi from "../hooks/useApi";
+import { NavLink } from "react-router-dom";
 
 const MainPage = () => {
     const [contacts, setContacts] = useState([]);
@@ -83,6 +84,7 @@ const MainPage = () => {
                     
                     <button onClick={() => setContactDetails(null)}>Zamknij</button>
                     <button onClick={() => handleDeletion(contactDetails.id)}>Usuń kontakt</button>
+                    <NavLink to={`/edit/${contactDetails.id}`}>Edytuj kontakt</NavLink>
                 </div>
             </div>
         )}
