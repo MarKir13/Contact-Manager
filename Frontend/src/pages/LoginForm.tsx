@@ -34,7 +34,7 @@ const LoginForm = () => {
     return ( 
         <>
             <Navbar />
-            <h2>Załóż konto</h2>
+            <h2>Zaloguj się</h2>
             <form onSubmit={handleLogin}>
                 <div className="inputField">
                     <label>Nazwa użytkownika:</label>
@@ -44,7 +44,7 @@ const LoginForm = () => {
                     <label>Hasło:</label>
                     <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button type="submit">Załóż konto</button>
+                <button type="submit">Zaloguj się</button>
             </form>
         </>  
     );
