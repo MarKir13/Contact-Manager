@@ -28,6 +28,7 @@ const RegisterForm = () => {
 
             if( response.success )
             {
+                alert("Konto zostało założone pomyślnie");
                 navigate("/login");
             } else {
                 if (response.validationErrors && Object.keys(response.validationErrors).length > 0) {
