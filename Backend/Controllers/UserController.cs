@@ -36,8 +36,8 @@ public class UserController : ControllerBase
     {
         try
         {
-            string token = await _userService.Login(dto);
-            return Ok(token);
+            string jwt_token = await _userService.Login(dto);
+            return Ok(new {token = jwt_token});
         }
         catch (ArgumentException ex)
         {
