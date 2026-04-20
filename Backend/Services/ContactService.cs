@@ -33,7 +33,7 @@ public class ContactService : IContactService
           Surname = dto.Surname,
           PhoneNumber = dto.PhoneNumber,
           Email = dto.Email,
-          PasswordHash = dto.Password,
+          PasswordHash = password_hash,
           BirthDate = dto.BirthDate,
           CategoryId = dto.CategoryId,
           SubcategoryId = dto.SubcategoryId,
