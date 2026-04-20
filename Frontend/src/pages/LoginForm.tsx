@@ -25,6 +25,8 @@ const LoginForm = () => {
                 sessionStorage.setItem("token", response.data.token);
                 alert("Pomyslnie zalogowano");
                 navigate("/");
+            } else {
+                alert(response.error);
             }
         } catch(err) {
             alert("Wystąpił nieoczekiwany błąd: " + err);

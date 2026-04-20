@@ -45,4 +45,18 @@ public class ContactService : IContactService
 
         return true;
     }
+
+    public async Task<List<GetContactSummaryDto>> GetAll()
+    {
+        var contacts = _context.Contacts.Select(c => new GetContactSummaryDto
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Surname = c.Surname,
+            PhoneNumber = c.PhoneNumber,
+            Email = c.Email
+        }).ToList();
+
+        return contacts;
+    }
 }

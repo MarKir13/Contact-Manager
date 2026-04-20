@@ -30,4 +30,11 @@ public class ContactController : ControllerBase
             return BadRequest(new {message = ex.Message});
         }
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var contactList = await _contactService.GetAll();
+        return Ok(new { contacts = contactList});
+    }
 }

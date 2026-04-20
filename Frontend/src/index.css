@@ -21,3 +21,10 @@ form input {
 .inputField * {
   padding: 0 10px;
 }
+
+.contactSummary {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border: solid #000;
+}
