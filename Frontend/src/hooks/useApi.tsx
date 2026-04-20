@@ -1,7 +1,16 @@
 const BASE_URL = 'http://localhost:5183/'
 
+interface ApiResponse<T>
+{
+    success: boolean;
+    error?: string;
+    statusCode?: number;
+    validationErrors?: Record<string, string[]>;
+    data?: T;
+}
+
 const useApi = () => {
-    const request = async (endpoint: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', body?: any) => {
+    const request = async <T= any>(endpoint: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', body?: any) : Promise<ApiResponse<T>> => {
         try {
             const token = sessionStorage.getItem("token");
                     const headers: HeadersInit = {}
@@ -50,6 +59,7 @@ const useApi = () => {
                     }
                     
                 }
+    return { request };
 };
 
 export default useApi;

@@ -47,6 +47,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 // app configuration
 var app = builder.Build();
 
@@ -59,5 +69,7 @@ app.MapControllers();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors("AllowFrontend");
 
 app.Run();
