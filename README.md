@@ -4,7 +4,7 @@ Basic web application for managing contacts. App offers all operations on contac
 
 ## Used Technologies
 
-# Backend:
+### Backend:
 Backend was implemented with help of .NET infrastructure. Main frameworks and libraries used:
 * **ASP.NET Core**: Main framework for handling backend structure
 * **Entity Framework Core**: Framework for handling database operations
@@ -13,27 +13,27 @@ Backend was implemented with help of .NET infrastructure. Main frameworks and li
 * **DotNetEnv**: Library that allows to use .env variables inside backend architecture
 * **BCrypt.Net-Next**: Key library for safe password encryption
 
-# Database:
+### Database:
 **SQLite** is the database that is used in this project
 
-# Frontend:
+### Frontend:
 Frontend was implemented with TypeScript. Main frameworks and libraries used:
 * **React**: Main framework that supports building single page application UI
 * **React-Router-Dom**: Library responsible for page navigation
 
 ## Builduing and Running application
-# Prerequisities
+### Prerequisities
 * Installed version 9.0 of **.NET SDK**
 * Installed **Node.js** environment with **npm** packages manager
 
-# Running Backend:
+### Running Backend:
 * Open terminal and go to `Backend` folder (e.g. `cd Backend`)
 * Run command `dotnet build` to build project
 * Run command `dotnet ef database update` to run database migrations
 * Run command `dotnet watch` to run the server
 * Server should be now available at `http://localhost:5183`
 
-# Running Frontend:
+### Running Frontend:
 * Open second terminal and go to `Frontend` folder (e.g. `cd Frontend`)
 * Run command `npm install` to install required packages
 * Run command `npm run dev` to run the vite developer server
@@ -41,7 +41,7 @@ Frontend was implemented with TypeScript. Main frameworks and libraries used:
 
 ## Main Classes and Methods
 
-# Backend
+### Backend
 * **Controllers**: contains all controllers that handle requests
     * **CategoryController**
         * `[HttpGet] GetAll()` returns all categories
@@ -70,7 +70,7 @@ Frontend was implemented with TypeScript. Main frameworks and libraries used:
 * **DTOs** contains classes that are used in data transfer between backend and frontend infrastructures
 * **Validators** contains classes that are used to validate DTOs
 
-# Frontend
+### Frontend
 * **commonElements**: stores `Navbar.tsx` which represents navigation bar used in multiple components
 * **hooks**: folder which has custom hooks. Main custom hook is `useApi.tsx` which is responsible for fethcing requests to backend server
 * **pages**: stores main pages components such as `MainPage.tsx` which shows contact list or `CreateContact.tsx` that allows creating new contacts for authenticated users
