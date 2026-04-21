@@ -56,6 +56,11 @@ const CreateContact = () => {
     const handleContactCreation = async (e: any) => {
         e.preventDefault();
 
+        if (category == null) {
+            alert("Kategoria nie może być pusta!");
+            return;
+        }
+
         try {
             const payload = {
                 name: name,
@@ -78,8 +83,11 @@ const CreateContact = () => {
                 if (response.validationErrors && Object.keys(response.validationErrors).length > 0) {
                     
                     const firstValidationError = Object.values(response.validationErrors)[0][0];
-                    
-                    alert(firstValidationError);
+                    if(firstValidationError == "The dto field is required.") {
+                        alert("Jedno z wymaganych pól jest puste");
+                    } else {
+                        alert(firstValidationError);
+                    }
                 } else {
                     alert("Błąd: " + response.error);
                 }

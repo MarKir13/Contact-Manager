@@ -176,7 +176,7 @@ const EditContact = () => {
                     </div>
                 )}
 
-                <button type="submit">Dodaj kontakt</button>
+                <button type="submit">Zaktualizuj kontakt</button>
             </form>
         </>
     );

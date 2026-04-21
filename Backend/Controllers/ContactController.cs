@@ -53,6 +53,7 @@ public class ContactController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpDelete]
     [Route("{id:guid}")]
     public async Task<IActionResult> DeleteById(Guid id)
@@ -68,6 +69,7 @@ public class ContactController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPut]
     [Route("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateContactDto dto)

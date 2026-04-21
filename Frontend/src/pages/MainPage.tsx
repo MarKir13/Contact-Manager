@@ -62,14 +62,17 @@ const MainPage = () => {
         <>
         <Navbar />
         <h2>Lista kontaktów</h2>
-        {contacts.map((contact: any) => (
-            <div className="contactSummary">
-                <h3>{contact.name} {contact.surname}</h3>
-                <span>Telefon: {contact.phoneNumber}</span>
-                <span>Email: {contact.email}</span>
-                <button onClick={() => fetchDetails(contact.id)}>Szczegóły</button>
-            </div>
-        ))}
+        <div className="mainContainer">
+            {contacts.map((contact: any) => (
+                <div className="contactSummary">
+                    <h3>{contact.name} {contact.surname}</h3>
+                    <span>Telefon: {contact.phoneNumber}</span>
+                    <span>Email: {contact.email}</span>
+                    <button onClick={() => fetchDetails(contact.id)}>Szczegóły</button>
+                </div>
+            ))}
+        </div>
+        
 
         {contactDetails && (
             <div className="modalOverlay">
