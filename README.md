@@ -21,7 +21,7 @@ Frontend was implemented with TypeScript. Main frameworks and libraries used:
 * **React**: Main framework that supports building single page application UI
 * **React-Router-Dom**: Library responsible for page navigation
 
-## Builduing and Running application
+## Building and Running application
 ### Prerequisities
 * Installed version 9.0 of **.NET SDK**
 * Installed **Node.js** environment with **npm** packages manager
@@ -60,14 +60,14 @@ JWT__AUDIENCE=exampleAudience
         * `[HttpDelete("{id}")] DeleteById()` removes specific contact from database
         * `[HttpPut("{id}")] Update()` modifies already existing contact
     * **SubcategoryController**:
-        * `[HttpGet] GetAll()` returns all subcategoires
+        * `[HttpGet] GetAll()` returns all subcategories
     * **UserController**:
         * `[HttpPost] Register()` creates new user account
         * `[HttpPost] Login()` authenticates user, if authentication went successfully returns jwt token for authenticated user
 * **Models**: contains classes that represent entities inside database tables
     * **Category** represents dicitonary entity which holds name of specific category
     * **Contact** entity that stores details about contact such as name, surname, email, phone number, etc.
-    * **Subcategory** represents dicitonary entity which holds name of specific subcategory
+    * **Subcategory** represents dictionary entity which holds name of specific subcategory
     * **User** represents user entity that holds informations needed for authentication
 * **Services**: contains classes that are responsible for business logic
     * **CategoryService** handles every operation where Category entity is directly involved
@@ -80,6 +80,6 @@ JWT__AUDIENCE=exampleAudience
 
 ### Frontend
 * **commonElements**: stores `Navbar.tsx` which represents navigation bar used in multiple components
-* **hooks**: folder which has custom hooks. Main custom hook is `useApi.tsx` which is responsible for fethcing requests to backend server
+* **hooks**: folder which has custom hooks. Main custom hook is `useApi.tsx` which is responsible for fetching requests to backend server
 * **pages**: stores main pages components such as `MainPage.tsx` which shows contact list or `CreateContact.tsx` that allows creating new contacts for authenticated users
 
