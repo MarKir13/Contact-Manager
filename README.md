@@ -25,6 +25,14 @@ Frontend was implemented with TypeScript. Main frameworks and libraries used:
 ### Prerequisities
 * Installed version 9.0 of **.NET SDK**
 * Installed **Node.js** environment with **npm** packages manager
+* Added `.env` file in main folder with example values:
+
+```
+JWT__SECRET=secret_key
+JWT__EXPIRATIONDATE=111
+JWT__ISSUER=exampleIssuer
+JWT__AUDIENCE=exampleAudience
+```
 
 ### Running Backend:
 * Open terminal and go to `Backend` folder (e.g. `cd Backend`)
